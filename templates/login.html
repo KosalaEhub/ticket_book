@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login | AirWave</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .text-cyan-glow {
+      color: #00fff0;
+      text-shadow: 0 0 8px #00fff0bb;
+    }
+    .shadow-cyan-hover:hover {
+      box-shadow: 0 0 20px #00fff0cc;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] min-h-screen font-sans">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-90 flex items-center justify-between px-8 py-4 z-50">
+    <a href="#" class="text-white font-bold text-xl flex items-center gap-2">
+      <span class="text-2xl">✈️</span> AirWave
+    </a>
+    <button id="navbarToggle" aria-label="Toggle menu" class="lg:hidden text-white">
+      <i class="fas fa-bars fa-lg"></i>
+    </button>
+    <ul id="navbarNav" class="hidden lg:flex space-x-6 text-white font-medium">
+      <li><a href="{{ url_for('home') }}" class="hover:text-cyan-glow">Home</a></li>
+      <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow">About</a></li>
+      <li><a href="{{ url_for('booking') }}" class="hover:text-cyan-glow">Booking</a></li>
+      <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow">Destinations</a></li>
+      <li><a href="#" class="hover:text-cyan-glow">Contact</a></li>
+      
+    </ul>
+  </nav>
+
+  <!-- Mobile menu -->
+  <ul id="mobileMenu" class="lg:hidden fixed top-16 left-0 right-0 bg-black bg-opacity-90 text-white font-medium flex flex-col space-y-4 p-6 z-40 hidden">
+    <li><a href="#" class="hover:text-cyan-glow">Home</a></li>
+    <li><a href="#" class="hover:text-cyan-glow">About</a></li>
+    <li><a href="#" class="hover:text-cyan-glow">Booking</a></li>
+    <li><a href="#" class="hover:text-cyan-glow">Destinations</a></li>
+    <li><a href="#" class="hover:text-cyan-glow">Contact</a></li>
+    <li><a href="#" class="text-cyan-glow"><i class="fas fa-user-circle"></i> Login</a></li>
+  </ul>
+
+  <!-- Login Form -->
+  <div class="animate-fadeInUp max-w-md w-full p-10 bg-black bg-opacity-70 rounded-3xl border border-cyan-400 mt-32 mx-auto text-white">
+    <h2 class="text-cyan-glow text-3xl font-bold mb-6 flex items-center gap-2 justify-center">
+      <i class="fas fa-user-circle"></i> Login
+    </h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="mb-4 text-red-400">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="space-y-6">
+      <div>
+        <label for="email" class="block mb-2 text-cyan-glow">Email</label>
+        <input type="email" name="email" id="email" required
+          class="w-full px-4 py-3 rounded bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="you@example.com" />
+      </div>
+
+      <div>
+        <label for="password" class="block mb-2 text-cyan-glow">Password</label>
+        <input type="password" name="password" id="password" required
+          class="w-full px-4 py-3 rounded bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="********" />
+      </div>
+
+      <button type="submit"
+        class="w-full bg-cyan-400 hover:bg-cyan-600 text-black font-bold py-3 rounded shadow-cyan-hover transition text-lg">
+        Login
+      </button>
+    </form>
+
+    <!-- Added Register link -->
+    <p class="mt-6 text-center text-cyan-glow">
+      Don't have an account? 
+      <a href="{{ url_for('register') }}" class="underline hover:text-cyan-600 font-semibold">Register here</a>.
+    </p>
+  </div>
+
+  <script>
+    // Toggle mobile navbar
+    document.getElementById('navbarToggle').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | AirWave</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f1f1f1;
+    }
+    .text-cyan-glow { color: #00fff0; text-shadow: 0 0 5px #00fff0aa; }
+    .text-cyan-glow-strong { color: #00fff0; text-shadow: 0 0 8px #00fff0bb; }
+    .shadow-cyan-light { box-shadow: 0 0 15px #00fff0aa; }
+    .shadow-cyan-hover { box-shadow: 0 0 35px #00fff0dd; transition: box-shadow 0.5s ease, transform 0.5s ease; }
+    .shadow-cyan-hover:hover { box-shadow: 0 0 45px #00fff0cc; transform: translateY(-10px); }
+    .bg-cyan-lightest { background-color: rgba(0, 255, 240, 0.05); }
+    .bg-cyan-light { background-color: rgba(0, 255, 240, 0.1); }
+    .bg-cyan-lighter { background-color: rgba(0, 255, 240, 0.15); }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-85 shadow-cyan-light flex items-center justify-between px-8 py-4 z-50">
+  <a href="/" class="text-white font-semibold text-xl flex items-center gap-2">
+    <span class="text-2xl">✈️</span> AirWave
+  </a>
+  <button id="navbarToggle" class="lg:hidden text-white focus:outline-none">
+    <i class="fas fa-bars fa-lg"></i>
+  </button>
+  <ul id="navbarNav" class="hidden lg:flex space-x-8 text-white font-medium">
+    <li><a href="{{ url_for('home') }}" class="text-cyan-glow">Home</a></li>
+    <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow">About</a></li>
+    <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow">Booking</a></li>
+    <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow">Destinations</a></li>
+    <li><a href="{{ url_for('contact') }}" class="text-cyan-glow font-semibold">Contact</a></li>
+    <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow flex items-center gap-2"><i class="fas fa-user-circle"></i> Login</a></li>
+  </ul>
+</nav>
+
+<!-- Mobile Menu -->
+<ul id="mobileMenu" class="lg:hidden fixed top-16 left-0 right-0 bg-black bg-opacity-90 text-white font-medium flex flex-col space-y-4 p-6 z-40 hidden">
+  <li><a href="{{ url_for('home') }}" class="hover:text-cyan-glow">Home</a></li>
+  <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow">About</a></li>
+  <li><a href="{{ url_for('booking') }}" class="hover:text-cyan-glow">Booking</a></li>
+  <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow">Destinations</a></li>
+  <li><a href="{{ url_for('contact') }}" class="text-cyan-glow font-semibold">Contact</a></li>
+  <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow flex items-center gap-2"><i class="fas fa-user-circle"></i> Login</a></li>
+</ul>
+
+<!-- Hero Section -->
+<section class="mt-28 max-w-[1100px] mx-auto text-center animate-fadeInUp">
+  <h1 class="text-5xl font-extrabold text-cyan-glow mb-4">Contact Us</h1>
+  <p class="text-gray-300 text-lg max-w-2xl mx-auto">We’re here to help. Drop us a message and we’ll get back to you soon.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="mt-6 max-w-xl mx-auto">
+        {% for category, message in messages %}
+          <div class="bg-green-500 bg-opacity-90 text-white text-md px-4 py-3 rounded-xl shadow-md animate-fadeInUp">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+</section>
+
+<!-- Contact Form -->
+<section class="max-w-[900px] mx-auto mt-12 p-10 bg-black bg-opacity-30 rounded-3xl shadow-cyan-light animate-fadeInUp">
+  <form method="post" action="{{ url_for('contact') }}" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="relative">
+        <input type="text" name="name" id="name" required placeholder=" " class="peer w-full p-4 bg-black bg-opacity-40 border border-cyan-400 rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+        <label for="name" class="absolute left-4 top-3 text-cyan-300 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-3 peer-focus:text-sm peer-focus:text-cyan-300">Full Name</label>
+      </div>
+      <div class="relative">
+        <input type="email" name="email" id="email" required placeholder=" " class="peer w-full p-4 bg-black bg-opacity-40 border border-cyan-400 rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+        <label for="email" class="absolute left-4 top-3 text-cyan-300 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-3 peer-focus:text-sm peer-focus:text-cyan-300">Email Address</label>
+      </div>
+    </div>
+    <div class="relative">
+      <input type="text" name="subject" id="subject" required placeholder=" " class="peer w-full p-4 bg-black bg-opacity-40 border border-cyan-400 rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+      <label for="subject" class="absolute left-4 top-3 text-cyan-300 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-3 peer-focus:text-sm peer-focus:text-cyan-300">Subject</label>
+    </div>
+    <div class="relative">
+      <textarea name="message" id="message" rows="5" required placeholder=" " class="peer w-full p-4 bg-black bg-opacity-40 border border-cyan-400 rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-cyan-400"></textarea>
+      <label for="message" class="absolute left-4 top-3 text-cyan-300 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-3 peer-focus:text-sm peer-focus:text-cyan-300">Your Message</label>
+    </div>
+    <div class="text-center mt-8">
+      <button type="submit" class="bg-cyan-400 text-black px-8 py-3 rounded-xl font-semibold shadow-cyan-hover hover:bg-cyan-600 transition transform hover:-translate-y-1">
+        Send Message
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- Map Section -->
+<section class="max-w-[900px] mx-auto mt-16 text-center animate-fadeInUp">
+  <h2 class="text-3xl text-cyan-glow font-bold mb-4">Visit Us</h2>
+  <p class="text-gray-300 mb-6">AirWave HQ, 123 Skyway Boulevard, Cloud City</p>
+  <iframe
+    class="w-full h-64 rounded-xl shadow-cyan-light border-2 border-cyan-400"
+    src="https://maps.google.com/maps?q=colombo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 py-10 text-center text-gray-400 shadow-cyan-inner mt-20">
+  <p class="mb-4">&copy; 2025 AirWave. All rights reserved.</p>
+  <div class="flex justify-center space-x-8 text-2xl">
+    <a href="#" class="hover:text-cyan-glow"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="hover:text-cyan-glow"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="hover:text-cyan-glow"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
+
+<script>
+  // Navbar toggle
+  const navbarToggle = document.getElementById('navbarToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navbarToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

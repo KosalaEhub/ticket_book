@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Futuristic Air Booking | AirWave</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f1f1f1;
+    }
+    .text-cyan-glow { color: #00fff0; text-shadow: 0 0 5px #00fff0aa; }
+    .text-cyan-glow-strong { color: #00fff0; text-shadow: 0 0 8px #00fff0bb; }
+    .text-cyan-glow-heavy { color: #00fff0; text-shadow: 0 0 10px #00fff0bb; }
+    .shadow-cyan-light { box-shadow: 0 0 15px #00fff0aa; }
+    .shadow-cyan-strong { box-shadow: 0 0 30px #00fff088; }
+    .shadow-cyan-stronger { box-shadow: 0 0 40px #00fff0aa; }
+    .shadow-cyan-hover { box-shadow: 0 0 35px #00fff0dd; transition: box-shadow 0.5s ease, transform 0.5s ease; }
+    .shadow-cyan-hover:hover { box-shadow: 0 0 45px #00fff0cc; transform: translateY(-10px); }
+    .shadow-cyan-inner { box-shadow: inset 0 2px 10px #00fff011; }
+    .bg-cyan-lightest { background-color: rgba(0, 255, 240, 0.05); }
+    .bg-cyan-light { background-color: rgba(0, 255, 240, 0.1); }
+    .bg-cyan-lighter { background-color: rgba(0, 255, 240, 0.15); }
+    .bg-cyan-light-hover:hover { background-color: rgba(0, 255, 240, 0.25); }
+  </style>
+</head>
+<body>
+
+<nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-85 shadow-cyan-light flex items-center justify-between px-8 py-4 z-50">
+  <a href="#" class="text-white font-semibold text-xl flex items-center gap-2">
+    <span class="text-2xl">✈️</span> AirWave
+  </a>
+  <button id="navbarToggle" aria-label="Toggle navigation" class="lg:hidden text-white focus:outline-none">
+    <i class="fas fa-bars fa-lg"></i>
+  </button>
+  <ul id="navbarNav" class="hidden lg:flex space-x-8 text-white font-medium">
+    <li><a href="{{ url_for('home') }}" class="text-cyan-glow font-semibold transition-colors">Home</a></li>
+    <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow transition-colors">About</a></li>
+    <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+    <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow transition-colors">Destinations</a></li>
+    <li><a href="{{ url_for('contact') }}" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+    <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow flex items-center gap-2 transition-colors"><i class="fas fa-user-circle"></i> Login</a></li>
+  </ul>
+</nav>
+
+<ul id="mobileMenu" class="lg:hidden fixed top-16 left-0 right-0 bg-black bg-opacity-90 text-white font-medium flex flex-col space-y-4 p-6 z-40 hidden">
+  <li><a href="Home.html" class="hover:text-cyan-glow transition-colors">Home</a></li>
+  <li><a href="About.html" class="hover:text-cyan-glow transition-colors">About</a></li>
+  <li><a href="#" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+  <li><a href="#" class="hover:text-cyan-glow transition-colors">Destinations</a></li>
+  <li><a href="#" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+  <li><a href="login.html" class="hover:text-cyan-glow flex items-center gap-2 transition-colors"><i class="fas fa-user-circle"></i> Login</a></li>
+</ul>
+
+<!-- Animated Hero Section -->
+<section class="mt-24 max-w-[1200px] mx-auto bg-black bg-opacity-40 rounded-2xl border-2 border-cyan-400 shadow-cyan-stronger p-8 pb-10 text-center">
+  <div class="flex flex-col items-center justify-center animate-fadeInUp">
+    <div class="relative w-full h-[300px] overflow-hidden">
+      <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-[80%] h-[8px] bg-cyan-400 rounded-full shadow-cyan-strong animate-pulse"></div>
+      <div class="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-1.5 h-16 bg-cyan-400 animate-ping"></div>
+      <div class="absolute left-1/2 transform -translate-x-1/2 bottom-16 w-24 h-24 bg-gradient-to-tr from-cyan-400 via-cyan-300 to-cyan-100 rounded-full shadow-cyan-strong animate-bounce">
+        <i class="fas fa-plane text-5xl text-black"></i>
+      </div>
+    </div>
+    <h1 class="text-4xl font-extrabold text-cyan-glow-strong mt-8">Book Your Future Flight Today</h1>
+    <div id="typing" class="mt-3 text-cyan-glow font-semibold text-2xl font-orbitron min-h-[30px] tracking-wide"></div>
+  </div>
+</section>
+
+<!-- Cookie Banner -->
+<div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-black bg-opacity-90 text-white p-4 text-center z-[1000] text-lg flex justify-center items-center gap-4">
+  <span>We use cookies to enhance your experience.</span>
+  <button onclick="acceptCookies()" class="bg-cyan-400 text-black rounded-md px-5 py-1 font-semibold hover:bg-cyan-600 transition">Allow</button>
+  <button onclick="declineCookies()" class="bg-cyan-400 text-black rounded-md px-5 py-1 font-semibold hover:bg-cyan-600 transition">Decline</button>
+</div>
+
+<!-- Vision & Mission -->
+<section id="vision-mission" class="container mx-auto max-w-[1100px] my-16 p-10 bg-black bg-opacity-30 rounded-3xl shadow-cyan-light">
+  <h2 class="text-cyan-glow text-5xl font-extrabold mb-12 text-center">Our Vision &amp; Mission</h2>
+  <div class="flex flex-col md:flex-row justify-center gap-10">
+    <div class="futuristic-card bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-8 flex flex-col items-center text-center min-h-[220px] shadow-cyan-light transition-transform duration-500 hover:shadow-cyan-hover hover:-translate-y-2">
+      <i class="fas fa-eye text-5xl text-cyan-400 mb-6"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-4">Our Vision</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">To revolutionize travel by delivering seamless, tech-powered air booking experiences for every explorer.</p>
+    </div>
+    <div class="futuristic-card bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-8 flex flex-col items-center text-center min-h-[220px] shadow-cyan-light transition-transform duration-500 hover:shadow-cyan-hover hover:-translate-y-2">
+      <i class="fas fa-rocket text-5xl text-cyan-400 mb-6"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-4">Our Mission</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">Empowering travelers globally with real-time access, futuristic booking tools, and personalized flight plans.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Our Values -->
+<section id="values" class="container mx-auto max-w-[1100px] my-16 p-10 bg-black bg-opacity-30 rounded-3xl shadow-cyan-light text-center">
+  <h2 class="text-cyan-glow text-5xl font-extrabold mb-12">Our Values</h2>
+  <div class="flex flex-col md:flex-row justify-center gap-10">
+    <div class="futuristic-card bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-8 flex flex-col items-center text-center min-h-[220px] shadow-cyan-light transition-transform duration-500 hover:shadow-cyan-hover hover:-translate-y-2 flex-1 max-w-md mx-auto md:mx-0">
+      <i class="fas fa-shield-alt text-5xl text-cyan-400 mb-6"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-4">Trust &amp; Security</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">We ensure every transaction is safe and every journey protected through advanced security protocols.</p>
+    </div>
+    <div class="futuristic-card bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-8 flex flex-col items-center text-center min-h-[220px] shadow-cyan-light transition-transform duration-500 hover:shadow-cyan-hover hover:-translate-y-2 flex-1 max-w-md mx-auto md:mx-0">
+      <i class="fas fa-thumbs-up text-5xl text-cyan-400 mb-6"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-4">Customer First</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">Your comfort and satisfaction are our top priorities — from search to landing.</p>
+    </div>
+    <div class="futuristic-card bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-8 flex flex-col items-center text-center min-h-[220px] shadow-cyan-light transition-transform duration-500 hover:shadow-cyan-hover hover:-translate-y-2 flex-1 max-w-md mx-auto md:mx-0">
+      <i class="fas fa-lightbulb text-5xl text-cyan-400 mb-6"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-4">Innovation</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">We're driven by innovation to create smarter, faster, and more intuitive ways to book and travel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose AirWave -->
+<section id="why-choose" class="container mx-auto max-w-[1100px] my-16 p-10 bg-black bg-opacity-30 rounded-3xl shadow-cyan-light text-center">
+  <h2 class="text-cyan-glow text-5xl font-extrabold mb-12">Why Choose AirWave?</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-w-4xl mx-auto">
+    <div>
+      <div class="counter text-cyan-glow-heavy font-extrabold text-4xl mb-2" data-target="12">0</div>
+      <p class="text-gray-300 font-semibold text-lg">No. Flights</p>
+    </div>
+    <div>
+      <div class="counter text-cyan-glow-heavy font-extrabold text-4xl mb-2" data-target="23">0</div>
+      <p class="text-gray-300 font-semibold text-lg">No. Destinations</p>
+    </div>
+    <div>
+           <div class="counter text-cyan-glow-heavy font-extrabold text-4xl mb-2" data-target="56">0</div>
+      <p class="text-gray-300 font-semibold text-lg">No. Passengers</p>
+    </div>
+    <div>
+      <div class="counter text-cyan-glow-heavy font-extrabold text-4xl mb-2" data-target="40">0</div>
+      <p class="text-gray-300 font-semibold text-lg">No. Countries</p>
+    </div>
+  </div>
+  <div class="flex flex-col md:flex-row justify-center gap-10 max-w-4xl mx-auto">
+    <div class="bg-cyan-light rounded-xl p-6 shadow-cyan-light flex flex-col items-center text-center min-h-[230px] transition-shadow duration-300 hover:shadow-cyan-hover hover:-translate-y-1">
+      <i class="fas fa-clock text-5xl text-cyan-400 mb-4"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-3">Instant Booking</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">Book your flights in real-time with live seat availability and pricing.</p>
+    </div>
+    <div class="bg-cyan-light rounded-xl p-6 shadow-cyan-light flex flex-col items-center text-center min-h-[230px] transition-shadow duration-300 hover:shadow-cyan-hover hover:-translate-y-1">
+      <i class="fas fa-robot text-5xl text-cyan-400 mb-4"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-3">AI-Powered Suggestions</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">Smart travel recommendations powered by artificial intelligence.</p>
+    </div>
+    <div class="bg-cyan-light rounded-xl p-6 shadow-cyan-light flex flex-col items-center text-center min-h-[230px] transition-shadow duration-300 hover:shadow-cyan-hover hover:-translate-y-1">
+      <i class="fas fa-globe text-5xl text-cyan-400 mb-4"></i>
+      <h5 class="text-cyan-glow-strong text-2xl font-extrabold mb-3">Global Network</h5>
+      <p class="text-gray-300 text-lg leading-relaxed flex-grow">Connect with flights in over 40 countries with 24/7 multilingual support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Next-Gen Travel Experience -->
+<section id="next-gen" class="bg-cyan-lightest rounded-3xl max-w-[1100px] mx-auto my-16 p-16 shadow-cyan-light text-cyan-glow text-center">
+  <h2 class="text-5xl font-extrabold mb-8">Next-Gen Travel Experience</h2>
+  <p class="text-xl max-w-3xl mx-auto leading-relaxed opacity-100">
+    At AirWave, we believe your journey begins the moment you dream about it. 
+    Our platform redefines traditional flight booking by blending futuristic UI design, 
+    personalized AI-driven recommendations, and an ever-expanding global network. 
+    Whether you’re planning a business trip or an adventure getaway, our intelligent 
+    system anticipates your needs and curates the best travel options at lightning speed. 
+    Welcome to a new era of smart, secure, and smooth air travel.
+  </p>
+</section>
+<!-- Add this inside <body>, after cookie banner -->
+
+<!-- Booking Now Modal -->
+<div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[1001] hidden">
+  <div class="bg-black bg-opacity-90 border-2 border-cyan-400 rounded-2xl shadow-cyan-stronger p-10 max-w-md w-full relative text-center text-white animate-fadeInUp">
+    <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-cyan-400 hover:text-white text-2xl font-bold">&times;</button>
+    <h2 class="text-3xl text-cyan-glow-strong font-extrabold mb-6">Book Your Flight Now</h2>
+    <p class="text-gray-300 text-lg mb-6">Start your next journey in just a few clicks. Explore destinations, find the best deals, and enjoy seamless booking with AirWave.</p>
+    <a href="{{ url_for('login') }}" class="bg-cyan-400 text-black px-6 py-2 rounded-md font-semibold hover:bg-cyan-600 transition">Start Booking</a>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<section id="testimonials" class="container mx-auto max-w-[1100px] my-20 text-center">
+  <h2 class="text-cyan-glow text-5xl font-extrabold mb-12">What Our Customers Say</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 px-4">
+    <div class="bg-cyan-lighter border-2 border-cyan-400 rounded-3xl p-8 shadow-cyan-strong text-cyan-glow italic text-xl leading-relaxed flex flex-col justify-center min-h-[200px] transition-shadow duration-300 hover:shadow-cyan-hover hover:bg-cyan-light-hover text-left">
+      "AirWave made booking my flight so simple and quick! The AI suggestions were spot on for my travel needs."
+      <div class="mt-8 font-extrabold text-lg text-right tracking-wider text-cyan-glow-strong">— Sarah K.</div>
+    </div>
+    <div class="bg-cyan-lighter border-2 border-cyan-400 rounded-3xl p-8 shadow-cyan-strong text-cyan-glow italic text-xl leading-relaxed flex flex-col justify-center min-h-[200px] transition-shadow duration-300 hover:shadow-cyan-hover hover:bg-cyan-light-hover text-left">
+      "The seamless interface and instant booking gave me peace of mind. Highly recommend AirWave!"
+      <div class="mt-8 font-extrabold text-lg text-right tracking-wider text-cyan-glow-strong">— Michael R.</div>
+    </div>
+    <div class="bg-cyan-lighter border-2 border-cyan-400 rounded-3xl p-8 shadow-cyan-strong text-cyan-glow italic text-xl leading-relaxed flex flex-col justify-center min-h-[200px] transition-shadow duration-300 hover:shadow-cyan-hover hover:bg-cyan-light-hover text-left">
+      "Traveling globally has never been easier thanks to AirWave's vast network and smart recommendations."
+      <div class="mt-8 font-extrabold text-lg text-right tracking-wider text-cyan-glow-strong">— Anika T.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 py-10 text-center text-gray-400 shadow-cyan-inner mt-20">
+  <p class="mb-4">&copy; 2025 AirWave. All rights reserved.</p>
+  <div class="flex justify-center space-x-8 text-2xl">
+    <a href="#" aria-label="Facebook" class="hover:text-cyan-glow transition-colors"><i class="fab fa-facebook"></i></a>
+    <a href="#" aria-label="Instagram" class="hover:text-cyan-glow transition-colors"><i class="fab fa-instagram"></i></a>
+    <a href="#" aria-label="Twitter" class="hover:text-cyan-glow transition-colors"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
+
+<script>
+  // Navbar toggle
+  const navbarToggle = document.getElementById('navbarToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navbarToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Counter animation logic
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / 100;
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 30);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        updateCount();
+        observer.disconnect();
+      }
+    });
+    observer.observe(counter);
+  });
+
+  // Typing animation for hero section
+  const phrases = [
+    'Next-gen air booking made simple.',
+    'Real-time access to global flights.',
+    'AI-powered travel recommendations.'
+  ];
+  let i = 0, j = 0, currentPhrase = '', isDeleting = false;
+
+  function typeLoop() {
+    if (i < phrases.length) {
+      currentPhrase = phrases[i];
+      let typedText = currentPhrase.substring(0, j);
+      document.getElementById('typing').innerHTML = typedText;
+      if (!isDeleting && j < currentPhrase.length) {
+        j++;
+        setTimeout(typeLoop, 100);
+      } else if (isDeleting && j > 0) {
+        j--;
+        setTimeout(typeLoop, 50);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) i = (i + 1) % phrases.length;
+        setTimeout(typeLoop, 1000);
+      }
+    }
+  }
+  typeLoop();
+
+  // Cookie banner handlers
+  function acceptCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+  function declineCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+
+
+  // Show booking modal when page loads
+// Show booking modal 3 seconds after page load
+window.onload = function () {
+  setTimeout(() => {
+    document.getElementById('bookingModal').classList.remove('hidden');
+  }, 3000); // 3000 ms = 3 seconds
+};
+
+// Close booking modal
+function closeBookingModal() {
+  document.getElementById('bookingModal').classList.add('hidden');
+}
+
+</script>
+
+</body>
+</html>

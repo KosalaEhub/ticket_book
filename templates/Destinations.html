@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Destinations | AirWave</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f1f1f1;
+      scroll-behavior: smooth;
+    }
+    .text-cyan-glow {
+      color: #00fff0;
+      text-shadow: 0 0 5px #00fff0aa;
+    }
+    .text-cyan-glow-strong {
+      color: #00fff0;
+      text-shadow: 0 0 8px #00fff0bb;
+    }
+    .shadow-cyan-hover:hover {
+      box-shadow: 0 0 30px #00fff0cc;
+      transform: translateY(-8px);
+      transition: all 0.4s ease-in-out;
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .zoom-in {
+      animation: zoomIn 0.6s ease-in-out;
+    }
+    .shadow-cyan-inner {
+      box-shadow: inset 0 2px 10px #00fff011;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-85 shadow-lg flex items-center justify-between px-8 py-4 z-50">
+  <a href="{{ url_for('home') }}" class="text-white font-semibold text-xl flex items-center gap-2">
+    <span class="text-2xl">✈️</span> AirWave
+  </a>
+  <button id="navbarToggle" aria-label="Toggle navigation" class="lg:hidden text-white focus:outline-none">
+    <i class="fas fa-bars fa-lg"></i>
+  </button>
+  <ul id="navbarNav" class="hidden lg:flex space-x-8 text-white font-medium">
+    <li><a href="{{ url_for('home') }}" class="hover:text-cyan-glow transition-colors">Home</a></li>
+    <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow transition-colors">About</a></li>
+    <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+    <li><a href="{{ url_for('destinations') }}" class="text-cyan-glow font-semibold transition-colors">Destinations</a></li>
+    <li><a href="{{ url_for('contact') }}" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+    
+  </ul>
+</nav>
+
+<!-- Mobile menu -->
+<ul id="mobileMenu" class="lg:hidden fixed top-16 left-0 right-0 bg-black bg-opacity-90 text-white font-medium flex flex-col space-y-4 p-6 z-40 hidden">
+  <li><a href="Home.html" class="hover:text-cyan-glow transition-colors">Home</a></li>
+  <li><a href="About.html" class="hover:text-cyan-glow transition-colors">About</a></li>
+  <li><a href="#" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+  <li><a href="destinations.html" class="text-cyan-glow font-semibold transition-colors">Destinations</a></li>
+  <li><a href="#" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+  <li><a href="#" class="hover:text-cyan-glow flex items-center gap-2 transition-colors"><i class="fas fa-user-circle"></i> Login</a></li>
+</ul>
+
+<!-- Header -->
+<header class="text-center py-32 px-6 mt-12">
+  <h1 class="text-5xl font-extrabold text-cyan-glow mb-6">Explore Our Destinations</h1>
+  <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+    Discover the world's most iconic cities with AirWave's global flight network. Select your dream location and start your journey.
+  </p>
+</header>
+
+<!-- Destinations Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto px-6 pb-20" id="destinationContainer">
+  <!-- JavaScript will render destination cards here -->
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 py-10 text-center text-gray-400 shadow-cyan-inner">
+  <p class="mb-4">&copy; 2025 AirWave. All rights reserved.</p>
+  <div class="flex justify-center space-x-8 text-2xl">
+    <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  // Navbar toggle
+  document.getElementById('navbarToggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  // Destination data
+  const destinations = [
+    "UK - London", "USA - New York", "USA - Washington", "USA - Los Angeles", "USA - Chicago",
+    "Dubai", "India - New Delhi", "India - Bangalore", "China - Shanghai", "Japan - Tokyo",
+    "Australia - Melbourne", "Australia - Perth", "Australia - Sydney", "New Zealand - Auckland",
+    "Canada - Toronto", "Canada - Ontario", "South Africa - Cape Town", "France - Paris",
+    "Sri Lanka - Colombo", "Brazil - Rio De Janeiro"
+  ];
+
+  const container = document.getElementById('destinationContainer');
+
+  // Render cards
+  destinations.forEach(place => {
+    const card = document.createElement('div');
+    card.className = "bg-black bg-opacity-40 border border-cyan-400 rounded-xl p-6 text-center shadow-lg zoom-in shadow-cyan-hover";
+    card.innerHTML = `
+      <h3 class="text-2xl text-cyan-glow font-bold mb-4">${place}</h3>
+      <p class="text-gray-300 mb-6">Book your journey to ${place.split(' - ')[1] || place} with confidence and ease.</p>
+      <button class="bg-cyan-400 hover:bg-cyan-600 text-black font-semibold py-2 px-5 rounded transition">Book Now</button>
+    `;
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

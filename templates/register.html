@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register | AirWave</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome for icon -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .text-cyan-glow {
+      color: #00fff0;
+      text-shadow: 0 0 8px #00fff0bb;
+    }
+    .bg-cyan-glow {
+      background-color: rgba(0, 255, 240, 0.15);
+      box-shadow: 0 0 20px #00fff0cc;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] min-h-screen font-sans">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-85 shadow-cyan-light flex items-center justify-between px-8 py-4 z-50">
+    <a href="{{ url_for('home') }}" class="text-white font-semibold text-xl flex items-center gap-2">
+      <span class="text-2xl">✈️</span> AirWave
+    </a>
+    <button id="navbarToggle" aria-label="Toggle navigation" class="lg:hidden text-white focus:outline-none">
+      <i class="fas fa-bars fa-lg"></i>
+    </button>
+    <ul id="navbarNav" class="hidden lg:flex space-x-8 text-white font-medium">
+      <li><a href="{{ url_for('home') }}" class="text-cyan-glow font-semibold transition-colors">Home</a></li>
+      <li><a href="#" class="hover:text-cyan-glow transition-colors">About</a></li>
+      <li><a href="#" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+      <li><a href="#" class="hover:text-cyan-glow transition-colors">Destinations</a></li>
+      <li><a href="#" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+      <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow flex items-center gap-2 transition-colors">
+        <i class="fas fa-user-circle"></i> Login
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile menu (hidden by default) -->
+  <ul id="mobileMenu" class="lg:hidden fixed top-16 left-0 right-0 bg-black bg-opacity-90 text-white font-medium flex flex-col space-y-4 p-6 z-40 hidden">
+    <li><a href="{{ url_for('home') }}" class="hover:text-cyan-glow transition-colors">Home</a></li>
+    <li><a href="{{ url_for('about') }}" class="hover:text-cyan-glow transition-colors">About</a></li>
+    <li><a href="#" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+    <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow transition-colors">Destinations</a></li>
+    <li><a href="#" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+    
+  </ul>
+
+  <!-- Register form container with margin top to avoid overlap with navbar -->
+  <div class="animate-fadeInUp max-w-lg w-full p-10 bg-black bg-opacity-70 rounded-3xl shadow-cyan-stronger border border-cyan-400 mt-24 mx-auto">
+    <h2 class="text-cyan-glow text-4xl font-extrabold mb-8 flex items-center gap-3 justify-center">
+      <i class="fas fa-user-plus"></i> Register
+    </h2>
+    <form method="POST" enctype="multipart/form-data" class="space-y-6 text-white">
+      <!-- form fields unchanged -->
+      <div>
+        <label for="fname" class="block mb-2 text-cyan-glow font-semibold">First Name:</label>
+        <input type="text" name="fname" id="fname" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <!-- rest of fields -->
+      <div>
+        <label for="lname" class="block mb-2 text-cyan-glow font-semibold">Last Name:</label>
+        <input type="text" name="lname" id="lname" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="email" class="block mb-2 text-cyan-glow font-semibold">Email:</label>
+        <input type="email" name="email" id="email" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="phone" class="block mb-2 text-cyan-glow font-semibold">Phone:</label>
+        <input type="text" name="phone" id="phone" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="country" class="block mb-2 text-cyan-glow font-semibold">Country:</label>
+        <input type="text" name="country" id="country" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="city" class="block mb-2 text-cyan-glow font-semibold">City:</label>
+        <input type="text" name="city" id="city" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="password" class="block mb-2 text-cyan-glow font-semibold">Password:</label>
+        <input type="password" name="password" id="password" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="confirm" class="block mb-2 text-cyan-glow font-semibold">Confirm Password:</label>
+        <input type="password" name="confirm" id="confirm" required
+          class="w-full px-4 py-3 rounded-lg bg-black bg-opacity-60 border border-cyan-400 placeholder-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
+      </div>
+      <div>
+        <label for="photo" class="block mb-2 text-cyan-glow font-semibold">Upload Photo:</label>
+        <input type="file" name="photo" id="photo" required
+          class="w-full text-cyan-400 focus:outline-none" />
+      </div>
+      <button type="submit"
+        class="w-full bg-cyan-400 hover:bg-cyan-600 text-black font-bold py-3 rounded-lg shadow-cyan-hover transition text-lg">
+        Register
+      </button>
+    </form>
+    <p class="mt-6 text-center text-cyan-glow">
+      <a href="{{ url_for('login') }}" class="hover:underline">Already have an account? Login</a>
+    </p>
+  </div>
+
+  <script>
+    // Navbar toggle for mobile menu
+    const navbarToggle = document.getElementById('navbarToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navbarToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

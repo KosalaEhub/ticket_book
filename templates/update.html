@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Profile</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUpStrong {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUpStrong {
+      animation: fadeInUpStrong 1s ease forwards;
+    }
+    .text-cyan-glow {
+      color: #00fff0;
+      text-shadow: 0 0 8px #00fff0bb;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] min-h-screen flex items-center justify-center p-8 font-sans text-white">
+
+  <div class="bg-black bg-opacity-40 border border-cyan-400 rounded-2xl shadow-cyan-stronger p-8 max-w-md w-full animate-fadeInUpStrong">
+    <h2 class="text-cyan-glow text-3xl font-extrabold mb-6 text-center">Update Profile</h2>
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block text-cyan-400 font-semibold mb-1" for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" value="{{ user.fname }}" required
+               class="w-full rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+      </div>
+      <div>
+        <label class="block text-cyan-400 font-semibold mb-1" for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname" value="{{ user.lname }}" required
+               class="w-full rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+      </div>
+      <div>
+        <label class="block text-cyan-400 font-semibold mb-1" for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value="{{ user.phone }}" required
+               class="w-full rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+      </div>
+      <div>
+        <label class="block text-cyan-400 font-semibold mb-1" for="country">Country:</label>
+        <input type="text" id="country" name="country" value="{{ user.country }}" required
+               class="w-full rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+      </div>
+      <div>
+        <label class="block text-cyan-400 font-semibold mb-1" for="city">City:</label>
+        <input type="text" id="city" name="city" value="{{ user.city }}" required
+               class="w-full rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+      </div>
+      <button type="submit"
+              class="w-full bg-cyan-400 hover:bg-cyan-600 text-black font-bold py-3 rounded-lg shadow-lg shadow-cyan-500 transition duration-300">
+        Save
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | AirWave</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f1f1f1;
+    }
+    .text-cyan-glow {
+      color: #00fff0;
+      text-shadow: 0 0 5px #00fff0aa;
+    }
+    .text-cyan-glow-strong {
+      color: #00fff0;
+      text-shadow: 0 0 8px #00fff0cc;
+    }
+    .shadow-cyan-light {
+      box-shadow: 0 0 15px #00fff0aa;
+    }
+    .shadow-cyan-hover:hover {
+      box-shadow: 0 0 45px #00fff0cc;
+      transform: translateY(-10px);
+    }
+    .bg-cyan-light {
+      background-color: rgba(0, 255, 240, 0.07);
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-in-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 bg-black bg-opacity-85 shadow-cyan-light flex items-center justify-between px-8 py-4 z-50">
+    <a href="index.html" class="text-white font-semibold text-xl flex items-center gap-2">
+      <span class="text-2xl">✈️</span> AirWave
+    </a>
+    <ul class="hidden lg:flex space-x-8 text-white font-medium">
+      <li><a href="{{ url_for('home') }}" class="hover:text-cyan-glow transition-colors">Home</a></li>
+      <li><a href="{{ url_for('about') }}" class="text-cyan-glow font-semibold transition-colors">About</a></li>
+      <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow transition-colors">Booking</a></li>
+      <li><a href="{{ url_for('destinations') }}" class="hover:text-cyan-glow transition-colors">Destinations</a></li>
+      <li><a href="{{ url_for('login') }}" class="hover:text-cyan-glow transition-colors">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- About Page Content -->
+  <section class="mt-36 max-w-5xl mx-auto px-6 py-10 text-center space-y-12">
+    <h1 class="text-5xl font-extrabold text-cyan-glow mb-6 fade-in-up">About AirWave</h1>
+
+    <!-- Section Card -->
+    <div class="fade-in-up bg-black bg-opacity-40 border border-cyan-400 rounded-2xl p-10 shadow-cyan-light transition-all hover:shadow-cyan-hover">
+      <h2 class="text-3xl text-cyan-glow-strong font-bold mb-4">Who We Are</h2>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        AirWave is a futuristic travel-tech company empowering global journeys. We provide AI-powered flight booking, real-time updates, and a seamless user experience backed by innovation and trust.
+      </p>
+    </div>
+
+    <div class="fade-in-up bg-black bg-opacity-40 border border-cyan-400 rounded-2xl p-10 shadow-cyan-light transition-all hover:shadow-cyan-hover">
+      <h2 class="text-3xl text-cyan-glow-strong font-bold mb-4">Our Vision</h2>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        To redefine global travel by merging advanced technology with human-centered design, making air booking smarter, faster, and more delightful for everyone.
+      </p>
+    </div>
+
+    <div class="fade-in-up bg-black bg-opacity-40 border border-cyan-400 rounded-2xl p-10 shadow-cyan-light transition-all hover:shadow-cyan-hover">
+      <h2 class="text-3xl text-cyan-glow-strong font-bold mb-4">Our Mission</h2>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        Our mission is to provide travelers with powerful digital tools, intelligent suggestions, and real-time access to flights — all within a futuristic, user-friendly platform that evolves with the needs of modern explorers.
+      </p>
+    </div>
+
+    <div class="fade-in-up bg-black bg-opacity-40 border border-cyan-400 rounded-2xl p-10 shadow-cyan-light transition-all hover:shadow-cyan-hover">
+      <h2 class="text-3xl text-cyan-glow-strong font-bold mb-4">Sustainability</h2>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        We are committed to a greener planet. AirWave partners with airlines and organizations that prioritize eco-friendly practices, including carbon offset programs and sustainable fuel solutions. Our technology also helps users make conscious travel decisions by highlighting low-impact flight options.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-10 text-center text-gray-400 shadow-cyan-light mt-20">
+    <p class="mb-4">&copy; 2025 AirWave. All rights reserved.</p>
+    <div class="flex justify-center space-x-8 text-2xl">
+      <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-cyan-glow transition-colors"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+  <!-- Reveal Animations -->
+  <script>
+    const sections = document.querySelectorAll('.fade-in-up');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
